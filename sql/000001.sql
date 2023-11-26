@@ -6,7 +6,6 @@ create table :GRAPHILE_WORKER_SCHEMA.job_queues (
   locked_at timestamptz,
   locked_by text
 );
-alter table :GRAPHILE_WORKER_SCHEMA.job_queues enable row level security;
 
 create table :GRAPHILE_WORKER_SCHEMA.jobs (
   id bigserial primary key,
@@ -21,7 +20,6 @@ create table :GRAPHILE_WORKER_SCHEMA.jobs (
   created_at timestamp with time zone not null default now(),
   updated_at timestamp with time zone not null default now()
 );
-alter table :GRAPHILE_WORKER_SCHEMA.jobs enable row level security;
 
 create index on :GRAPHILE_WORKER_SCHEMA.jobs (priority, run_at, id);
 

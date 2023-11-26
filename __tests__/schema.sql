@@ -370,7 +370,3 @@ ALTER TABLE ONLY graphile_worker._private_tasks
     ADD CONSTRAINT tasks_pkey PRIMARY KEY (id);
 CREATE INDEX jobs_main_index ON graphile_worker._private_jobs USING btree (priority, run_at) INCLUDE (id, task_id, job_queue_id) WHERE (is_available = true);
 CREATE INDEX jobs_no_queue_index ON graphile_worker._private_jobs USING btree (priority, run_at) INCLUDE (id, task_id) WHERE ((is_available = true) AND (job_queue_id IS NULL));
-ALTER TABLE graphile_worker._private_job_queues ENABLE ROW LEVEL SECURITY;
-ALTER TABLE graphile_worker._private_jobs ENABLE ROW LEVEL SECURITY;
-ALTER TABLE graphile_worker._private_known_crontabs ENABLE ROW LEVEL SECURITY;
-ALTER TABLE graphile_worker._private_tasks ENABLE ROW LEVEL SECURITY;

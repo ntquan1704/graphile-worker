@@ -39,13 +39,11 @@ create table :GRAPHILE_WORKER_SCHEMA.job_queues (
   locked_by text,
   is_available boolean generated always as ((locked_at is null)) stored not null
 );
-alter table :GRAPHILE_WORKER_SCHEMA.job_queues enable row level security;
 
 create table :GRAPHILE_WORKER_SCHEMA.tasks (
   id int primary key generated always as identity,
   identifier text not null unique check (length(identifier) <= 128)
 );
-alter table :GRAPHILE_WORKER_SCHEMA.tasks enable row level security;
 
 create table :GRAPHILE_WORKER_SCHEMA.jobs (
   id bigint primary key generated always as identity,
@@ -66,7 +64,6 @@ create table :GRAPHILE_WORKER_SCHEMA.jobs (
   flags jsonb,
   is_available boolean generated always as (((locked_at is null) and (attempts < max_attempts))) stored not null
 );
-alter table :GRAPHILE_WORKER_SCHEMA.jobs enable row level security;
 
 create index jobs_main_index
   on :GRAPHILE_WORKER_SCHEMA.jobs
